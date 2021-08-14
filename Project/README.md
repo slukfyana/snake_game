@@ -1,4 +1,2 @@
 # slukfyana
-# slukfyana
-# Snake
 # Snake
