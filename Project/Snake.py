@@ -24,6 +24,7 @@ class SNAKE:
         self.body_tl = pygame.image.load('Graphics/body_tl.png').convert_alpha()
         self.body_br = pygame.image.load('Graphics/body_br.png').convert_alpha()
         self.body_bl = pygame.image.load('Graphics/body_bl.png').convert_alpha()
+        self.chips_sound = pygame.mixer.Sound('Sound/chips.mpeg')
 
     def draw_snake(self):
         self.update_head_graphics()
@@ -84,6 +85,9 @@ class SNAKE:
     def add_block(self):
         self.new_block=True
 
+    def play_chips_sound(self):
+        self.chips_sound.play()
+
     def reset(self):
         self.body = [Vector2(5,10),Vector2(4,10),Vector2(3,10)]
         self.direction=Vector2(0,0)
@@ -122,6 +126,7 @@ class MAIN:
         if self.fruit.pos==self.snake.body[0]:
             self.fruit.randomize()
             self.snake.add_block()
+            self.snake.play_chips_sound()
 
         for block in self.snake.body[1:]:
             if block == self.fruit.pos:
@@ -168,6 +173,7 @@ class MAIN:
         pygame.draw.rect(screen,(56,74,12),bg_rect,2)
 
 
+pygame.mixer.pre_init()
 pygame.init()
 cell_size = 30
 cell_number = 20
