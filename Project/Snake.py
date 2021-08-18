@@ -93,13 +93,13 @@ class SNAKE:
         self.direction=Vector2(0,0)
         
 
-class FRUIT:
+class ANIMAL:
     def __init__(self):
         self.randomize()
 
-    def draw_fruit(self):
-        fruit_rect = pygame.Rect(int(self.pos.x*cell_size),int(self.pos.y*cell_size),cell_size,cell_size)
-        screen.blit(food,fruit_rect)
+    def draw_animal(self):
+        animal_rect = pygame.Rect(int(self.pos.x*cell_size),int(self.pos.y*cell_size),cell_size,cell_size)
+        screen.blit(food,animal_rect)
 
     def randomize(self):
         self.x = random.randint(0,cell_number - 1)
@@ -109,7 +109,7 @@ class FRUIT:
 class MAIN:
     def __init__(self):
         self.snake=SNAKE()
-        self.fruit=FRUIT()
+        self.animal=ANIMAL()
 
     def update(self): 
         self.snake.move_snake()
@@ -118,19 +118,19 @@ class MAIN:
 
     def draw_elements(self):
         self.draw_grass()
-        self.fruit.draw_fruit()
+        self.animal.draw_animal()
         self.snake.draw_snake()
         self.draw_score()
             
     def check_collision(self):
-        if self.fruit.pos==self.snake.body[0]:
-            self.fruit.randomize()
+        if self.animal.pos==self.snake.body[0]:
+            self.animal.randomize()
             self.snake.add_block()
             self.snake.play_chips_sound()
 
         for block in self.snake.body[1:]:
-            if block == self.fruit.pos:
-                self.fruit.randomize()
+            if block == self.animal.pos:
+                self.animal.randomize()
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
